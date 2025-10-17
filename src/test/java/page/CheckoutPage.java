@@ -49,20 +49,20 @@ public class CheckoutPage extends BaseTest {
     public void clickChartButton() {
         driver.findElement(clickChartButton).click();
     }
-    public void onCheckoutPage(){
+    public boolean onCheckoutPage(){
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         WebElement backPackElement = wait.until(ExpectedConditions.visibilityOfElementLocated(checkoutPage));
-        assertTrue(backPackElement.isDisplayed(), "on checkoutpage.");
+        return backPackElement.isDisplayed();
     }
 
     public void clickCheckoutButton()  {
         driver.findElement(clickCheckoutButton).click();
     }
 
-    public void onCheckoutInformation () {
+    public boolean onCheckoutInformation () {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         WebElement backPackElement = wait.until(ExpectedConditions.visibilityOfElementLocated(checkoutInformation));
-        assertTrue(backPackElement.isDisplayed(), "on checkout information.");
+        return backPackElement.isDisplayed();
     }
 
     public void inputCheckoutInformation (String firstName, String lastName, String zip)  {
@@ -76,28 +76,33 @@ public class CheckoutPage extends BaseTest {
         driver.findElement(continueButton).click();
     }
 
-    public void  onCheckoutOverview () {
+    public boolean  onCheckoutOverview () {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         WebElement backPackElement = wait.until(ExpectedConditions.visibilityOfElementLocated(checkoutOverview));
-        assertTrue(backPackElement.isDisplayed(), "on checkout overview.");
+        return backPackElement.isDisplayed();
     }
 
     public void clickFinishButton () {
         driver.findElement(finishButton).click();
     }
 
-    public void onFinishPage (String message) {
+    public String onFinishPage () {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         WebElement backPackElement = wait.until(ExpectedConditions.visibilityOfElementLocated(thankYouMessage));
-        assertTrue(backPackElement.isDisplayed(), "on finish page.");
-        assertEquals(driver.findElement(thankYouMessage).getText(), message);
+        if(backPackElement.isDisplayed()){
+           return driver.findElement(thankYouMessage).getText();
+        }
+        return null;
+
     }
 
-    public void onFinishPageNegative (String message) {
+    public String onFinishPageNegative () {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         WebElement backPackElement = wait.until(ExpectedConditions.visibilityOfElementLocated(thankYouMessage));
-        assertTrue(backPackElement.isDisplayed(), "on finish page.");
-        assertNotEquals(driver.findElement(thankYouMessage).getText(), message);
+        if(backPackElement.isDisplayed()){
+            return driver.findElement(thankYouMessage).getText();
+        }
+        return null;
     }
 
 

@@ -3,6 +3,8 @@ package stepdef;
 import io.cucumber.java.en.Then;
 import page.HomePage;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 public class HomeStepDef extends BaseTest {
 
     HomePage homePage;
@@ -10,6 +12,6 @@ public class HomeStepDef extends BaseTest {
     @Then("user is on homepage")
     public void userIsOnHomepage () {
         homePage = new HomePage(driver);
-        homePage.validateBackPackDisplayed();
+        assertTrue(homePage.validateBackPackDisplayed(), "Backpack item should be visible on the homepage.");
     }
 }

@@ -13,7 +13,7 @@ import page.LoginPage;
 
 import java.time.Duration;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class CheckoutStepDef extends BaseTest {
 
@@ -44,7 +44,8 @@ public class CheckoutStepDef extends BaseTest {
 
     @And("user at checkout page")
     public void userAtCheckoutPage() {
-        checkoutPage.onCheckoutPage();
+        assertTrue(checkoutPage.onCheckoutPage(), "on checkoutpage.");
+
     }
 
     @And("click checkout button")
@@ -55,7 +56,7 @@ public class CheckoutStepDef extends BaseTest {
 
     @And("user at input checkout information")
     public void userAtInputCheckoutInformation() {
-        checkoutPage.onCheckoutInformation();
+        assertTrue( checkoutPage.onCheckoutInformation(), "on checkout information.");
     }
 
     @Then("input checkout information {string} {string} {string}")
@@ -71,7 +72,7 @@ public class CheckoutStepDef extends BaseTest {
 
     @And("user is on checkout overview")
     public void userIsOnCheckoutOverview() {
-        checkoutPage.onCheckoutOverview();
+        assertTrue(checkoutPage.onCheckoutOverview(), "on checkout overview.");
     }
 
     @And("click finish button")
@@ -81,12 +82,11 @@ public class CheckoutStepDef extends BaseTest {
 
     @Then("checkout completed {string}")
     public void checkoutCompleted(String message) {
-        checkoutPage.onFinishPage(message);
+        assertEquals(checkoutPage.onFinishPage(), message);
     }
 
     @Then("checkout not completed {string}")
     public void checkoutNotCompleted(String message) {
-        checkoutPage.onFinishPageNegative(message);
-
+        assertNotEquals(checkoutPage.onFinishPageNegative(), message);
     }
 }

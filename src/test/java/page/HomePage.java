@@ -19,10 +19,10 @@ public class HomePage {
         this.driver = driver;
     }
 
-    public void validateBackPackDisplayed() {
+    public boolean validateBackPackDisplayed() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         WebElement backPackElement = wait.until(ExpectedConditions.visibilityOfElementLocated(backPackItem));
-        assertTrue(backPackElement.isDisplayed(), "Backpack item should be visible on the homepage.");
+        return backPackElement.isDisplayed();
     }
 
 }

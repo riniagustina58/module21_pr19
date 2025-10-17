@@ -4,6 +4,8 @@ package stepdef;
 import io.cucumber.java.en.*;
 import page.LoginPage;
 
+import static org.junit.Assert.assertTrue;
+
 public class LoginStepDef extends BaseTest{
 
     LoginPage loginPage;
@@ -29,8 +31,8 @@ public class LoginStepDef extends BaseTest{
         loginPage.clickButton();
     }
 
-    @And("user see error message error {string}")
+    @Then("user see error message error {string}")
     public void userSeeErrorMessage(String errorMessage) {
-        loginPage.validateErrorAppear(errorMessage);
+        assertTrue(loginPage.validateErrorAppear().contains(errorMessage));
     }
 }

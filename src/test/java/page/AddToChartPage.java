@@ -21,10 +21,12 @@ public class AddToChartPage extends BaseTest {
         driver.findElement(addToChartButton).click();
     }
 
-    public void validate(String str){
-        assertTrue(driver.findElement(removeFromChartButton).getText().equalsIgnoreCase(str));
+    public String validate(){
+        return driver.findElement(removeFromChartButton).getText();
+
     }
-    public void validateError(String str){
-        assertFalse(driver.findElement(removeFromChartButton).getText().equalsIgnoreCase(str));
+    public String validateError(){
+        return driver.findElement(removeFromChartButton).getText();
+
     }
 }

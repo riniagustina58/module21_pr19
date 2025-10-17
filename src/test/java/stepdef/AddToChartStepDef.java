@@ -1,13 +1,15 @@
 package stepdef;
 
-import io.cucumber.java.PendingException;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import page.AddToChartPage;
 import page.LoginPage;
 
-public class AddToChart extends BaseTest{
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
+public class AddToChartStepDef extends BaseTest{
 
     AddToChartPage addToChartPage;
     LoginPage loginPage;
@@ -29,12 +31,13 @@ public class AddToChart extends BaseTest{
 
 
     @Then("item added to chart {string}")
-    public void itemAddedToChart(String arg0) {
-        addToChartPage.validate(arg0);
+    public void itemAddedToChart(String str) {
+        assertTrue(addToChartPage.validate().equalsIgnoreCase(str));
     }
 
     @Then("item not Added to chart {string}")
-    public void itemNotAddedToChart(String arg0) {
-        addToChartPage.validateError(arg0);
+    public void itemNotAddedToChart(String str) {
+        assertFalse(addToChartPage.validateError().equalsIgnoreCase(str));
     }
+
 }

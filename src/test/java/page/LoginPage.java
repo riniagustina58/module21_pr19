@@ -32,8 +32,8 @@ public void clickButton(){
     driver.findElement(loginButton).click();
 }
 
-public void validateErrorAppear(String errorMessage) {
-    assertTrue(driver.getPageSource().contains(errorMessage));
+public String validateErrorAppear() {
+    return driver.getPageSource();
 }
 
 }
