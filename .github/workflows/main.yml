@@ -33,6 +33,18 @@ jobs:
         run: ./gradlew cucumber
         shell: bash
 
+      - name: Upload Cucumber HTML report
+        uses: actions/upload-artifact@v3
+        with:
+          name: cucumber-report-html
+          path: reports/cucumber.html
+
+      - name: Upload Cucumber JSON report
+        uses: actions/upload-artifact@v3
+        with:
+          name: cucumber-report-json
+          path: reports/cucumber.json
+
   dependency-submission:
     runs-on: ubuntu-latest
     name: Dependency Submission

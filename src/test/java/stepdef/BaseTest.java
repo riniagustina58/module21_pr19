@@ -27,9 +27,17 @@ public class BaseTest {
         // Jalankan Chrome tanpa infobar & notifikasi
         options.addArguments("--disable-notifications");
         options.addArguments("--disable-infobars");
-        options.addArguments("--start-maximized");
         options.addArguments("--disable-save-password-bubble");
         options.addArguments("--incognito");
+        options.addArguments("--start-maximized");
+
+        // Jika berjalan di CI (GitHub Actions) pakai headless dan opsi sandbox-friendly
+        if (System.getenv("GITHUB_ACTIONS") != null) {
+            options.addArguments("--headless=new");
+            options.addArguments("--no-sandbox");
+            options.addArguments("--disable-dev-shm-usage");
+        }
+
         driver = new ChromeDriver(options);
         driver.manage().window().maximize();
 
