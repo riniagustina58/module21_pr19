@@ -1,17 +1,16 @@
-package stepdef;
+package stepdef.ui;
 
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
-import org.openqa.selenium.WebDriver;
 
 public class CucumberHooks extends BaseTest {
 
-    @Before
+    @Before("@ui")
     public void beforeTest() {
         getDriver();
     }
 
-    @After
+    @After("@ui")
     public void AfterTest() {
         driver.close();
     }

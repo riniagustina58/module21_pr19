@@ -2,7 +2,7 @@ package page;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import stepdef.BaseTest;
+import stepdef.ui.BaseTest;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;

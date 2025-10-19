@@ -1,7 +1,7 @@
 @Checkout
 Feature: Checkout
 
-  @Checkout-all-item
+  @ui @Checkout-all-item
   Scenario: Checkout all item
     Given user is on homepage "standard_user" "secret_sauce"
     And user select all item
@@ -15,7 +15,7 @@ Feature: Checkout
     And click finish button
     Then checkout completed "Thank you for your order!"
 
-  @Checkout-all-item-negative
+  @ui @Checkout-all-item-negative
   Scenario: Checkout all item
     Given user is on homepage "standard_user" "secret_sauce"
     And user select all item
