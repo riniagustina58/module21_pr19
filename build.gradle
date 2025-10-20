@@ -33,21 +33,23 @@ test {
 task cucumber(type: Test) {
     dependsOn assemble
     useJUnit()
-    testLogging {
-        events "passed", "skipped", "failed"
-    }
+    include '**/CucumberTest.class'
     systemProperty "cucumber.filter.tags", "@ui"
     systemProperty "cucumber.glue", "stepdef/ui"
     systemProperty "cucumber.features", "src/test/resources/features/ui"
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
 }
 
 task cucumberApi(type: Test) {
     dependsOn assemble
     useJUnit()
-    testLogging {
-        events "passed", "skipped", "failed"
-    }
+    include '**/CucumberTestApi.class'
     systemProperty "cucumber.filter.tags", "@api"
     systemProperty "cucumber.glue", "stepdef/api"
     systemProperty "cucumber.features", "src/test/resources/features/api"
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
 }
