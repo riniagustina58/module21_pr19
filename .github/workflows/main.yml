@@ -28,6 +28,12 @@ jobs:
       - name: Make gradlew executable
         run: chmod +x ./gradlew
 
+      - name: Debug Environment Variables
+        run: |
+          echo "GITHUB_SERVER_URL=${GITHUB_SERVER_URL}"
+          echo "GITHUB_REPOSITORY=${GITHUB_REPOSITORY}"
+          echo "GITHUB_RUN_ID=${GITHUB_RUN_ID}"
+
       - name: Run API Tests
         run: ./gradlew cucumberApi
         env:
