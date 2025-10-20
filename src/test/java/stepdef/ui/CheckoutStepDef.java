@@ -4,10 +4,9 @@ package stepdef.ui;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
+import org.junit.Assert;
 import page.CheckoutPage;
 import page.LoginPage;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 public class CheckoutStepDef extends BaseTest {
 
@@ -38,7 +37,7 @@ public class CheckoutStepDef extends BaseTest {
 
     @And("user at checkout page")
     public void userAtCheckoutPage() {
-        assertTrue(checkoutPage.onCheckoutPage(), "on checkoutpage.");
+        Assert.assertTrue("on checkoutpage.", checkoutPage.onCheckoutPage());
 
     }
 
@@ -50,7 +49,7 @@ public class CheckoutStepDef extends BaseTest {
 
     @And("user at input checkout information")
     public void userAtInputCheckoutInformation() {
-        assertTrue( checkoutPage.onCheckoutInformation(), "on checkout information.");
+        Assert.assertTrue("on checkout information.", checkoutPage.onCheckoutInformation());
     }
 
     @Then("input checkout information {string} {string} {string}")
@@ -66,7 +65,7 @@ public class CheckoutStepDef extends BaseTest {
 
     @And("user is on checkout overview")
     public void userIsOnCheckoutOverview() {
-        assertTrue(checkoutPage.onCheckoutOverview(), "on checkout overview.");
+        Assert.assertTrue("on checkout overview.",checkoutPage.onCheckoutOverview());
     }
 
     @And("click finish button")
@@ -76,11 +75,11 @@ public class CheckoutStepDef extends BaseTest {
 
     @Then("checkout completed {string}")
     public void checkoutCompleted(String message) {
-        assertEquals(checkoutPage.onFinishPage(), message);
+        Assert.assertEquals(checkoutPage.onFinishPage(), message);
     }
 
     @Then("checkout not completed {string}")
     public void checkoutNotCompleted(String message) {
-        assertNotEquals(checkoutPage.onFinishPageNegative(), message);
+        Assert.assertNotEquals(checkoutPage.onFinishPageNegative(), message);
     }
 }

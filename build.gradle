@@ -18,31 +18,21 @@ dependencies {
     testImplementation 'io.cucumber:cucumber-java:7.15.0'
     testImplementation 'io.cucumber:cucumber-junit:7.15.0'
 
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
-    testRuntimeOnly   'org.junit.jupiter:junit-jupiter-engine:5.8.1'
-
+    testImplementation 'org.junit.vintage:junit-vintage-engine:5.8.1'
     testImplementation 'io.rest-assured:rest-assured:5.3.0'
     testImplementation 'org.json:json:20230227'
-
 }
-
 
 test {
-    useJUnitPlatform()
     useJUnit()
-}
-
-configurations {
-    cucumberRuntime {
-        extendsFrom testImplementation
+    testLogging {
+        events "passed", "skipped", "failed"
     }
 }
 
-def tags  = (findProperty('tags') == null) ? 'not @exclude' : findProperty('tags') + ' and not @exclude'
-
 task cucumber(type: Test) {
     dependsOn assemble
-    useJUnitPlatform()
+    useJUnit()
     testLogging {
         events "passed", "skipped", "failed"
     }
@@ -53,7 +43,7 @@ task cucumber(type: Test) {
 
 task cucumberApi(type: Test) {
     dependsOn assemble
-    useJUnitPlatform()
+    useJUnit()
     testLogging {
         events "passed", "skipped", "failed"
     }
@@ -61,4 +51,3 @@ task cucumberApi(type: Test) {
     systemProperty "cucumber.glue", "stepdef/api"
     systemProperty "cucumber.features", "src/test/resources/features/api"
 }
-

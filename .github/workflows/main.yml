@@ -5,6 +5,7 @@ on:
     branches: ["main"]
   pull_request:
     branches: ["main"]
+  workflow_dispatch:
 
 jobs:
   build:
@@ -12,9 +13,11 @@ jobs:
     name: Build and Test
 
     steps:
+      # --- Checkout repository ---
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      # --- Setup Java ---
       - name: Set up JDK 21
         uses: actions/setup-java@v4
         with:
@@ -22,18 +25,22 @@ jobs:
           distribution: 'temurin'
           cache: gradle
 
+      # --- Setup Chrome for Selenium ---
       - name: Setup Chrome
         uses: browser-actions/setup-chrome@v2.1.0
 
+      # --- Make gradlew executable ---
       - name: Make gradlew executable
         run: chmod +x ./gradlew
 
+      # --- Debug Environment Variables (optional) ---
       - name: Debug Environment Variables
         run: |
           echo "GITHUB_SERVER_URL=${GITHUB_SERVER_URL}"
           echo "GITHUB_REPOSITORY=${GITHUB_REPOSITORY}"
           echo "GITHUB_RUN_ID=${GITHUB_RUN_ID}"
 
+      # --- Run API Tests ---
       - name: Run API Tests
         run: ./gradlew cucumberApi
         env:
@@ -41,6 +48,7 @@ jobs:
           GITHUB_REPOSITORY: ${{ github.repository }}
           GITHUB_RUN_ID: ${{ github.run_id }}
 
+      # --- Run UI Tests ---
       - name: Run UI Tests
         run: ./gradlew cucumber
         env:
@@ -48,14 +56,32 @@ jobs:
           GITHUB_REPOSITORY: ${{ github.repository }}
           GITHUB_RUN_ID: ${{ github.run_id }}
 
-      - name: Upload Cucumber HTML report
+      # --- Upload UI Reports ---
+      - name: Upload Cucumber UI HTML report
+        if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: cucumber-report-html
+          name: cucumber-ui-html
           path: reports/cucumber.html
 
-      - name: Upload Cucumber JSON report
+      - name: Upload Cucumber UI JSON report
+        if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: cucumber-report-json
+          name: cucumber-ui-json
           path: reports/cucumber.json
+
+      # --- Upload API Reports ---
+      - name: Upload Cucumber API HTML report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cucumber-api-html
+          path: reports/cucumberApi.html
+
+      - name: Upload Cucumber API JSON report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cucumber-api-json
+          path: reports/cucumberApi.json
